@@ -1,18 +1,3 @@
-
-/*
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res, next) => {
-    res.send("olá mundo")
-})
-
-
-res.status(200).json({msg : "Listando..."})
-app.listen(3000, () => {
-    console.log("Site funcionando em http://localhost:3000");
-})
-*/
 const express = require("express");
 const { Pool } = require("pg");
 const app = express();
