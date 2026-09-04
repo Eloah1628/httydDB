@@ -12,97 +12,91 @@ const db = new Pool({
 });
 
 //Cavaleiro
-app.get("/Cavaleiro", (req, res, next) => {
+app.get("/Cavaleiro", async (req, res) => {
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando cavaleiros..."})
-        } else {
-            
-        }
+        const [ListaCavaleiros] = await conexao.query("SELECT * FROM Cavaleiro");
+        res.status(200).json(ListaCavaleiros);
+
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
 })
 
-app.get("/Cavaleiro/:id", (req, res, next) => {
+app.get("/Cavaleiro/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando cavaleiro por ID..."})
-        } else {
-            
-        }
+        const cavaleiro = await conexao.query("SELECT * FROM Dragao WHERE id = ?", [id]);
+        res.status(200).json(cavaleiro);
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
 })
 
-app.post("/Cavaleiro", async (req, res, next) => {
-    const Genero = ["F", "f", "M", "m"];
+app.post("/Cavaleiro", async (req, res) => {
+    const {nome, sobrenome, idade, sexo, funcao} = req.body;
+    GenerosAceitaveis = ['F', 'f', 'M', 'm'];
+
     try {
-        if (condition) {
-
-
-            res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"})    
+        if (!sexo in GenerosAceitaveis) {
+            res.status(405).json({msg: "Sexo não identificado."});
+        } else if(idade < 13 || idade > 80) {
+            res.status(405).json({msg : "Você não tem idade para isso!"});
         } else {
-            
+            await conexao.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES(?, ?, ?, ?, ?)", [nome, sobrenome, idade, sexo, funcao]);
+
+            res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"});
         }
     } catch (error) {
         res.status(400).json({msg :"Não foi possível cadastrar."})
     }
 })
 
-app.put("/Cavaleiro/:id", (req, res, next) => {
+app.put("/Cavaleiro/:id", async (req, res) => {
     const id = req.params.id;
+    const {nome, sobrenome, idade, sexo, funcao} = req.body;
+
     try {
-        if (condition) {
-
-
-            res.status(200).json({msg : " editado com sucesso!"})     
+        const [verificador] = await conexao.query("SELECT * FROM Cavaleiro");
+        if (id < 1) {
+            res.status(405).json({msg : "ID inválido"});
+        } else if(verificador.length >= id) {
+            res.status(405).json({msg : "A lista tem " + verificador.length + " cavaleiros."});
         } else {
-            
+            if (!sexo in GenerosAceitaveis) {
+                res.status(405).json({msg: "Sexo não identificado."});
+            } else {
+                const cavaleiro = await conexao.query("UPDATE Cavaleiro SET name=?, sobrenome=?, idade=?, sexo=?, funcao=? WHERE id=?", [nome, sobrenome, idade, sexo, funcao, id]);
+            }
         }
     } catch (error) {
         res.status(404).json({msg : "Algo deu errado na edição."})        
     }
 })
 
-app.delete("/Cavaleiro/:id", (req, res, next) => {
+app.delete("/Cavaleiro/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        if (condition) {
-
-
-            res.status(200).json({msg : "Cavaleiro deletado com sucesso!"})  
-        } else {
-            
-        }
+        const cavaleiro = await conexao.query("DELETE * FROM Cavaleiro WHERE id = ?", [id])
+        
+        res.status(200).json({msg : "Cavaleiro deletado com sucesso!"});
     } catch (error) {
-        res.status(400).json({msg : "Não encontrado!"})        
+        res.status(400).json({msg : "Não encontrado!"});       
     }
 })
 
 
 //Dragão
-app.get("/Dragao", (req, res, next) => {
+app.get("/Dragao", async (req, res) => {
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando dragões..."})
-        } else {
-            
-        }
+        const [ListaDragoes] = await conexao.query("SELECT * FROM Dragao")
+        res.status(200).json(ListaDragoes);
+
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
 })
 
-app.get("/Dragao/:id", (req, res, next) => {
+app.get("/Dragao/:id", (req, res) => {
     const id = req.params.id;
     try {
         if (condition) {
@@ -117,7 +111,8 @@ app.get("/Dragao/:id", (req, res, next) => {
     }
 })
 
-app.post("/Dragao", (req, res, next) => {
+app.post("/Dragao", (req, res) => {
+    tipo = ['Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker'];
     try {
         if (condition) {
             
@@ -130,7 +125,7 @@ app.post("/Dragao", (req, res, next) => {
     }
 })
 
-app.put("/Dragao/:id", (req, res, next) => {
+app.put("/Dragao/:id", (req, res) => {
     const id = req.params.id;
     try {
         if (condition) {
@@ -145,7 +140,7 @@ app.put("/Dragao/:id", (req, res, next) => {
     }
 })
 
-app.delete("/Dragao/:id", (req, res, next) => {
+app.delete("/Dragao/:id", (req, res) => {
     const id = req.params.id;
     try {
         if (condition) {
@@ -161,7 +156,7 @@ app.delete("/Dragao/:id", (req, res, next) => {
 })
 
 //Treinamento
-app.get("/Treinamento", (req, res, next) => {
+app.get("/Treinamento", (req, res) => {
     try {
         if (condition) {
             
@@ -175,7 +170,7 @@ app.get("/Treinamento", (req, res, next) => {
     }
 })
 
-app.get("/Treinamento/:id", (req, res, next) => {
+app.get("/Treinamento/:id", (req, res) => {
     const id = req.params.id;
     try {
         if (condition) {
@@ -190,7 +185,7 @@ app.get("/Treinamento/:id", (req, res, next) => {
     }
 })
 
-app.post("/Treinamento", (req, res, next) => {
+app.post("/Treinamento", (req, res) => {
     try {
         if (condition) {
             
@@ -218,7 +213,7 @@ app.put("/Treinamento:id", () => {
     }
 })
 
-app.delete("/Treinamento/:id", (req, res, next) => {
+app.delete("/Treinamento/:id", (req, res) => {
     const id = req.params.id;
     try {
         if (condition) {
