@@ -15,7 +15,7 @@ const db = new Pool({
 //Cavaleiro
 app.get("/Cavaleiro", async (req, res) => {
     try {
-        const [ListaCavaleiros] = await db.query("SELECT * FROM Cavaleiro");
+        const ListaCavaleiros = await db.query("SELECT * FROM Cavaleiro");
         res.status(200).json(ListaCavaleiros);
 
     } catch (error) {
@@ -23,7 +23,7 @@ app.get("/Cavaleiro", async (req, res) => {
     }
 })
 
-app.get("/Cavaleiro/:id", VerificaId, async (req, res) => {
+app.get("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
 
     try {
         const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = $1", [id]);
@@ -52,28 +52,17 @@ app.post("/Cavaleiro", async (req, res) => {
     }
 })
 
-app.put("/Cavaleiro/:id", VerificaId, async (req, res) => {
+app.put("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
 
     try {
-        const [verificador] = await db.query("SELECT * FROM Cavaleiro");
-        
-        if (!) {
-
-        }
-        else {
-            if (!sexo in GenerosAceitaveis) {
-                res.status(405).json({msg: "Sexo não identificado."});
-            } else {
-                const cavaleiro = await db.query("UPDATE Cavaleiro SET name=$1, sobrenome=$2, idade=$3, sexo=$4, funcao=$5 WHERE id=$6", [nome, sobrenome, idade, sexo, funcao, id]);
-            }
-        }
+        const cavaleiro = await db.query("UPDATE Cavaleiro SET name=$1, sobrenome=$2, idade=$3, sexo=$4, funcao=$5 WHERE id=$6", [nome, sobrenome, idade, sexo, funcao, id]);
     } catch (error) {
         res.status(404).json({msg : "Algo deu errado na edição."})        
     }
 })
 
-app.delete("/Cavaleiro/:id", VerificaId, async (req, res) => {
+app.delete("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
     try {
         const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = $1", [id]);
         
@@ -95,15 +84,9 @@ app.get("/Dragao", async (req, res) => {
     }
 })
 
-app.get("/Dragao/:id", VerificaId, (req, res) => {
+app.get("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando dragão por ID..."})
-        } else {
-            
-        }
+        res.status(200).json({msg : "Listando dragão por ID..."});
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
@@ -123,7 +106,7 @@ app.post("/Dragao", (req, res) => {
     }
 })
 
-app.put("/Dragao/:id", VerificaId, (req, res) => {
+app.put("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
     try {
         if (condition) {
 
@@ -137,7 +120,7 @@ app.put("/Dragao/:id", VerificaId, (req, res) => {
     }
 })
 
-app.delete("/Dragao/:id", VerificaId, (req, res) => {
+app.delete("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
     try {
         if (condition) {
 
@@ -166,7 +149,7 @@ app.get("/Treinamento", (req, res) => {
     }
 })
 
-app.get("/Treinamento/:id", VerificaId, (req, res) => {
+app.get("/Treinamento/:id", VerificaId("Treinamento"), (req, res) => {
     try {
         if (condition) {
             
@@ -193,7 +176,7 @@ app.post("/Treinamento", (req, res) => {
     }
 })
 
-app.put("/Treinamento:id", VerificaId, () => {
+app.put("/Treinamento:id", VerificaId("Treinamento"), () => {
     try {
         if (condition) {
 
@@ -207,7 +190,7 @@ app.put("/Treinamento:id", VerificaId, () => {
     }
 })
 
-app.delete("/Treinamento/:id", VerificaId, (req, res) => {
+app.delete("/Treinamento/:id", VerificaId("Treinamento"), (req, res) => {
     try {
         if (condition) {
 
