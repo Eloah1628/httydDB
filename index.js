@@ -17,7 +17,7 @@ app.get("/Cavaleiro", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando..."})
+            res.status(200).json({msg : "Listando cavaleiros..."})
         } else {
             
         }
@@ -31,7 +31,7 @@ app.get("/Cavaleiro/:id", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando por ID..."})
+            res.status(200).json({msg : "Listando cavaleiro por ID..."})
         } else {
             
         }
@@ -44,20 +44,23 @@ app.post("/Cavaleiro", async (req, res, next) => {
     const Genero = ["F", "f", "M", "m"];
     try {
         if (condition) {
-            
+
+
+            res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"})    
         } else {
             
         }
     } catch (error) {
-        
+        res.status(400).json({msg :"Não foi possível cadastrar."})
     }
-    
 })
 
 app.put("/Cavaleiro/:id", (req, res, next) => {
     try {
         if (condition) {
-            
+
+
+            res.status(200).json({msg : " editado com sucesso!"})     
         } else {
             
         }
@@ -71,7 +74,7 @@ app.delete("/Cavaleiro/:id", (req, res, next) => {
         if (condition) {
 
 
-            res.status(200).json({msg : "Deletado com sucesso!"})  
+            res.status(200).json({msg : "Cavaleiro deletado com sucesso!"})  
         } else {
             
         }
@@ -87,7 +90,7 @@ app.get("/Dragao", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando..."})
+            res.status(200).json({msg : "Listando dragões..."})
         } else {
             
         }
@@ -101,7 +104,7 @@ app.get("/Dragao/:id", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando por ID..."})
+            res.status(200).json({msg : "Listando dragão por ID..."})
         } else {
             
         }
@@ -114,7 +117,8 @@ app.post("/Dragao", (req, res, next) => {
     try {
         if (condition) {
             
-        } else {
+
+            res.status(200).json({msg : "Dragão adicionado com sucesso!"})} else {
             
         }
     } catch (error) {
@@ -125,7 +129,9 @@ app.post("/Dragao", (req, res, next) => {
 app.put("/Dragao/:id", (req, res, next) => {
     try {
         if (condition) {
-            
+
+
+            res.status(200).json({msg : "Dragão editado com sucesso!"})     
         } else {
             
         }
@@ -139,7 +145,7 @@ app.delete("/Dragao/:id", (req, res, next) => {
         if (condition) {
 
             
-            res.status(200).json({msg : "Deletado com sucesso!"})  
+            res.status(200).json({msg : "Dragão deletado com sucesso!"})  
         } else {
             
         }
@@ -154,7 +160,7 @@ app.get("/Treinamento", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando..."})
+            res.status(200).json({msg : "Listando treinamentos disponíveis..."})
         } else {
             
         }
@@ -168,12 +174,12 @@ app.get("/Treinamento/:id", (req, res, next) => {
         if (condition) {
             
             
-            res.status(200).json({msg : "Listando por ID..."})
+            res.status(200).json({msg : "Listando treinamento por ID..."})
         } else {
             
         }
     } catch (error) {
-        res.status(404).json({msg : "Não encontrado!"});        
+        res.status(404).json({msg : "Treinamento não encontrado!"});        
     }
 })
 
@@ -181,7 +187,8 @@ app.post("/Treinamento", (req, res, next) => {
     try {
         if (condition) {
             
-        } else {
+
+            res.status(200).json({msg : "Treinamento adicionado com sucesso!"})} else {
             
         }
     } catch (error) {
@@ -192,7 +199,9 @@ app.post("/Treinamento", (req, res, next) => {
 app.put("/Treinamento:id", () => {
     try {
         if (condition) {
-            
+
+
+            res.status(200).json({msg : " editado com sucesso!"})     
         } else {
             
         }
@@ -204,6 +213,8 @@ app.put("/Treinamento:id", () => {
 app.delete("/Treinamento/:id", (req, res, next) => {
     try {
         if (condition) {
+
+            
             res.status(200).json({msg : "Deletado com sucesso!"})  
         } else {
             
