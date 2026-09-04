@@ -26,7 +26,6 @@ app.get("/Cavaleiro", async (req, res) => {
 })
 
 app.get("/Cavaleiro/:id", VerificaId, async (req, res) => {
-    const id = req.params.id;
 
     try {
         const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = ?", [id]);
@@ -56,7 +55,6 @@ app.post("/Cavaleiro", async (req, res) => {
 })
 
 app.put("/Cavaleiro/:id", VerificaId, async (req, res) => {
-    const id = req.params.id;
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
 
     try {
@@ -78,7 +76,6 @@ app.put("/Cavaleiro/:id", VerificaId, async (req, res) => {
 })
 
 app.delete("/Cavaleiro/:id", VerificaId, async (req, res) => {
-    const id = req.params.id;
     try {
         const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = ?", [id])
         
@@ -101,7 +98,6 @@ app.get("/Dragao", async (req, res) => {
 })
 
 app.get("/Dragao/:id", VerificaId, (req, res) => {
-    const id = req.params.id;
     try {
         if (condition) {
             
@@ -130,7 +126,6 @@ app.post("/Dragao", (req, res) => {
 })
 
 app.put("/Dragao/:id", VerificaId, (req, res) => {
-    const id = req.params.id;
     try {
         if (condition) {
 
@@ -145,7 +140,6 @@ app.put("/Dragao/:id", VerificaId, (req, res) => {
 })
 
 app.delete("/Dragao/:id", VerificaId, (req, res) => {
-    const id = req.params.id;
     try {
         if (condition) {
 
@@ -175,7 +169,6 @@ app.get("/Treinamento", (req, res) => {
 })
 
 app.get("/Treinamento/:id", VerificaId, (req, res) => {
-    const id = req.params.id;
     try {
         if (condition) {
             
@@ -203,7 +196,6 @@ app.post("/Treinamento", (req, res) => {
 })
 
 app.put("/Treinamento:id", VerificaId, () => {
-    const id = req.params.id;
     try {
         if (condition) {
 
@@ -218,7 +210,6 @@ app.put("/Treinamento:id", VerificaId, () => {
 })
 
 app.delete("/Treinamento/:id", VerificaId, (req, res) => {
-    const id = req.params.id;
     try {
         if (condition) {
 
