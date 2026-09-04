@@ -12,8 +12,6 @@ const db = new Pool({
     port: 5432
 });
 
-const VerificaId = require("./middlewares/verificaId");
-
 //Cavaleiro
 app.get("/Cavaleiro", async (req, res) => {
     try {
@@ -28,7 +26,7 @@ app.get("/Cavaleiro", async (req, res) => {
 app.get("/Cavaleiro/:id", VerificaId, async (req, res) => {
 
     try {
-        const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = ?", [id]);
+        const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = $1", [id]);
         res.status(200).json(cavaleiro);
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
@@ -45,7 +43,7 @@ app.post("/Cavaleiro", async (req, res) => {
         } else if(idade < 13 || idade > 80) {
             res.status(405).json({msg : "Você não tem idade para isso!"});
         } else {
-            await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES(?, ?, ?, ?, ?)", [nome, sobrenome, idade, sexo, funcao]);
+            await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES($1, $2, $3, $4, $5)", [nome, sobrenome, idade, sexo, funcao]);
 
             res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"});
         }
@@ -67,7 +65,7 @@ app.put("/Cavaleiro/:id", VerificaId, async (req, res) => {
             if (!sexo in GenerosAceitaveis) {
                 res.status(405).json({msg: "Sexo não identificado."});
             } else {
-                const cavaleiro = await db.query("UPDATE Cavaleiro SET name=?, sobrenome=?, idade=?, sexo=?, funcao=? WHERE id=?", [nome, sobrenome, idade, sexo, funcao, id]);
+                const cavaleiro = await db.query("UPDATE Cavaleiro SET name=$1, sobrenome=$2, idade=$3, sexo=$4, funcao=$5 WHERE id=$6", [nome, sobrenome, idade, sexo, funcao, id]);
             }
         }
     } catch (error) {
@@ -77,7 +75,7 @@ app.put("/Cavaleiro/:id", VerificaId, async (req, res) => {
 
 app.delete("/Cavaleiro/:id", VerificaId, async (req, res) => {
     try {
-        const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = ?", [id])
+        const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = $1", [id]);
         
         res.status(200).json({msg : "Cavaleiro deletado com sucesso!"});
     } catch (error) {
