@@ -14,7 +14,7 @@ const db = new Pool({
 //Cavaleiro
 app.get("/Cavaleiro", async (req, res) => {
     try {
-        const [ListaCavaleiros] = await conexao.query("SELECT * FROM Cavaleiro");
+        const [ListaCavaleiros] = await db.query("SELECT * FROM Cavaleiro");
         res.status(200).json(ListaCavaleiros);
 
     } catch (error) {
@@ -25,7 +25,7 @@ app.get("/Cavaleiro", async (req, res) => {
 app.get("/Cavaleiro/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        const cavaleiro = await conexao.query("SELECT * FROM Dragao WHERE id = ?", [id]);
+        const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = ?", [id]);
         res.status(200).json(cavaleiro);
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
@@ -42,7 +42,7 @@ app.post("/Cavaleiro", async (req, res) => {
         } else if(idade < 13 || idade > 80) {
             res.status(405).json({msg : "Você não tem idade para isso!"});
         } else {
-            await conexao.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES(?, ?, ?, ?, ?)", [nome, sobrenome, idade, sexo, funcao]);
+            await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES(?, ?, ?, ?, ?)", [nome, sobrenome, idade, sexo, funcao]);
 
             res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"});
         }
@@ -56,7 +56,7 @@ app.put("/Cavaleiro/:id", async (req, res) => {
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
 
     try {
-        const [verificador] = await conexao.query("SELECT * FROM Cavaleiro");
+        const [verificador] = await db.query("SELECT * FROM Cavaleiro");
         if (id < 1) {
             res.status(405).json({msg : "ID inválido"});
         } else if(verificador.length >= id) {
@@ -65,7 +65,7 @@ app.put("/Cavaleiro/:id", async (req, res) => {
             if (!sexo in GenerosAceitaveis) {
                 res.status(405).json({msg: "Sexo não identificado."});
             } else {
-                const cavaleiro = await conexao.query("UPDATE Cavaleiro SET name=?, sobrenome=?, idade=?, sexo=?, funcao=? WHERE id=?", [nome, sobrenome, idade, sexo, funcao, id]);
+                const cavaleiro = await db.query("UPDATE Cavaleiro SET name=?, sobrenome=?, idade=?, sexo=?, funcao=? WHERE id=?", [nome, sobrenome, idade, sexo, funcao, id]);
             }
         }
     } catch (error) {
@@ -76,7 +76,7 @@ app.put("/Cavaleiro/:id", async (req, res) => {
 app.delete("/Cavaleiro/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        const cavaleiro = await conexao.query("DELETE * FROM Cavaleiro WHERE id = ?", [id])
+        const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = ?", [id])
         
         res.status(200).json({msg : "Cavaleiro deletado com sucesso!"});
     } catch (error) {
@@ -88,7 +88,7 @@ app.delete("/Cavaleiro/:id", async (req, res) => {
 //Dragão
 app.get("/Dragao", async (req, res) => {
     try {
-        const [ListaDragoes] = await conexao.query("SELECT * FROM Dragao")
+        const [ListaDragoes] = await db.query("SELECT * FROM Dragao")
         res.status(200).json(ListaDragoes);
 
     } catch (error) {
