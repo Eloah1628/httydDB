@@ -27,6 +27,7 @@ app.get("/Cavaleiro", (req, res, next) => {
 })
 
 app.get("/Cavaleiro/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
             
@@ -56,6 +57,7 @@ app.post("/Cavaleiro", async (req, res, next) => {
 })
 
 app.put("/Cavaleiro/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
 
@@ -70,6 +72,7 @@ app.put("/Cavaleiro/:id", (req, res, next) => {
 })
 
 app.delete("/Cavaleiro/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
 
@@ -100,6 +103,7 @@ app.get("/Dragao", (req, res, next) => {
 })
 
 app.get("/Dragao/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
             
@@ -127,6 +131,7 @@ app.post("/Dragao", (req, res, next) => {
 })
 
 app.put("/Dragao/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
 
@@ -141,6 +146,7 @@ app.put("/Dragao/:id", (req, res, next) => {
 })
 
 app.delete("/Dragao/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
 
@@ -170,6 +176,7 @@ app.get("/Treinamento", (req, res, next) => {
 })
 
 app.get("/Treinamento/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
             
@@ -197,6 +204,7 @@ app.post("/Treinamento", (req, res, next) => {
 })
 
 app.put("/Treinamento:id", () => {
+    const id = req.params.id;
     try {
         if (condition) {
 
@@ -211,10 +219,11 @@ app.put("/Treinamento:id", () => {
 })
 
 app.delete("/Treinamento/:id", (req, res, next) => {
+    const id = req.params.id;
     try {
         if (condition) {
 
-            
+
             res.status(200).json({msg : "Deletado com sucesso!"})  
         } else {
             
