@@ -12,6 +12,9 @@ const db = new Pool({
     password: "sua_senha",
     port: 5432
 });
+//Variáveis conferidas
+const GenerosAceitaveis = ['F', 'f', 'M', 'm'];
+const TiposAceitaveis = ['Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker'];
 
 //Cavaleiro
 app.get("/Cavaleiro", async (req, res) => {
@@ -25,6 +28,7 @@ app.get("/Cavaleiro", async (req, res) => {
 })
 
 app.get("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
+    id = req.params.id;
 
     try {
         const cavaleiro = await db.query("SELECT * FROM Dragao WHERE id = $1", [id]);
@@ -34,18 +38,14 @@ app.get("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
     }
 })
 
-app.post("/Cavaleiro", async (req, res) => {
+app.post("/Cavaleiro", VerificaLista(GenerosAceitaveis, "sexo"), async (req, res) => {
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
-    GenerosAceitaveis = ['F', 'f', 'M', 'm'];
 
-    try {
-        if (!sexo in GenerosAceitaveis) {
-            res.status(405).json({msg: "Sexo não identificado."});
-        } else if(idade < 13 || idade > 80) {
+    try { 
+        if(idade < 13 || idade > 80) {
             res.status(405).json({msg : "Você não tem idade para isso!"});
         } else {
             await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES($1, $2, $3, $4, $5)", [nome, sobrenome, idade, sexo, funcao]);
-
             res.status(200).json({msg : "Cavaleiro adicionado com sucesso!"});
         }
     } catch (error) {
@@ -55,7 +55,7 @@ app.post("/Cavaleiro", async (req, res) => {
 
 app.put("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
-
+    id = req.params.id;
     try {
         const cavaleiro = await db.query("UPDATE Cavaleiro SET name=$1, sobrenome=$2, idade=$3, sexo=$4, funcao=$5 WHERE id=$6", [nome, sobrenome, idade, sexo, funcao, id]);
     } catch (error) {
@@ -64,6 +64,7 @@ app.put("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
 })
 
 app.delete("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
+    id = req.params.id;
     try {
         const cavaleiro = await db.query("DELETE * FROM Cavaleiro WHERE id = $1", [id]);
         
@@ -77,15 +78,15 @@ app.delete("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
 //Dragão
 app.get("/Dragao", async (req, res) => {
     try {
-        const [ListaDragoes] = await db.query("SELECT * FROM Dragao")
+        const ListaDragoes = await db.query("SELECT * FROM Dragao")
         res.status(200).json(ListaDragoes);
-
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
 })
 
-app.get("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
+app.get("/Dragao/:id", VerificaId("Dragao"), async (req, res) => {
+    id = req.params.id;
     try {
         res.status(200).json({msg : "Listando dragão por ID..."});
     } catch (error) {
@@ -93,113 +94,83 @@ app.get("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
     }
 })
 
-app.post("/Dragao", (req, res) => {
-    tipo = ['Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker'];
+app.post("/Dragao", VerificaLista(GenerosAceitaveis, "sexo"), VerificaLista(TiposAceitaveis, "tipo"), async (req, res) => {
+    const {nome, especie, sexo, tipo, treinamentoID, cavaleiroID} = req.body;
     try {
-        if (condition) {
-            
-
-            res.status(200).json({msg : "Dragão adicionado com sucesso!"})} else {
-            
-        }
+        await db.query("INSERT INTO Dragoes(nome, especie, sexo, tipo, treinamentoID, cavaleiroID) VALUES($1, $2, $3, $4, $5, $6)", [nome, especie, sexo, tipo, treinamentoID, cavaleiroID])
+        res.status(200).json({msg : "Dragão adicionado com sucesso!"})
     } catch (error) {
         res.status(400).json({msg :"Não foi possível cadastrar."})
     }
 })
 
-app.put("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
+app.put("/Dragao/:id", VerificaId("Dragao"), VerificaLista(GenerosAceitaveis, "sexo"), VerificaLista(TiposAceitaveis, "tipo"), async (req, res) => {
+    const {nome, especie, sexo, tipo, treinamentoID, cavaleiroID} = req.body;
+    id = req.params.id;
     try {
-        if (condition) {
-
-
-            res.status(200).json({msg : "Dragão editado com sucesso!"})     
-        } else {
-            
-        }
+        await db.query("UPDATE Dragoes SET nome=$1, especie=$2, sexo=$3, tipo=$4, treinamentoID=$5, cavaleiroID=$6 WHERE id=$7", [nome, especie, sexo, tipo, treinamentoID, cavaleiroID, id]);
+        res.status(200).json({msg : "Dragão editado com sucesso!"})
     } catch (error) {
         res.status(404).json({msg : "Algo deu errado na edição."})        
     }
 })
 
-app.delete("/Dragao/:id", VerificaId("Dragao"), (req, res) => {
+app.delete("/Dragao/:id", VerificaId("Dragao"), async (req, res) => {
+    id = req.params.id;
     try {
-        if (condition) {
-
-            
-            res.status(200).json({msg : "Dragão deletado com sucesso!"})  
-        } else {
-            
-        }
+        await db.query("DELETE FROM Dragoes WHERE id=$1", [id]);
+        res.status(200).json({msg : "Treinamento adicionado com sucesso!"});
     } catch (error) {
-        res.status(400).json({msg : "Não encontrado!"})        
+        res.status(400).json({msg : "Não encontrado!"});  
     }
 })
 
 //Treinamento
-app.get("/Treinamento", (req, res) => {
+app.get("/Treinamento", async (req, res) => {
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando treinamentos disponíveis..."})
-        } else {
-            
-        }
+        
+        res.status(200).json({msg : "Treinamento adicionado com sucesso!"})
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
 })
 
-app.get("/Treinamento/:id", VerificaId("Treinamento"), (req, res) => {
+app.get("/Treinamento/:id", VerificaId("Treinamento"), async (req, res) => {
+    id = req.params.id;
     try {
-        if (condition) {
-            
-            
-            res.status(200).json({msg : "Listando treinamento por ID..."})
-        } else {
-            
-        }
+        
+        res.status(200).json({msg : "Treinamento adicionado com sucesso!"})
     } catch (error) {
         res.status(404).json({msg : "Treinamento não encontrado!"});        
     }
 })
 
-app.post("/Treinamento", (req, res) => {
+app.post("/Treinamento", async (req, res) => {
+    const {tipo, quemrealiza, dragaoparticipante, tempo} = req.body;
     try {
-        if (condition) {
-            
 
-            res.status(200).json({msg : "Treinamento adicionado com sucesso!"})} else {
-            
-        }
+        res.status(200).json({msg : "Treinamento adicionado com sucesso!"})
     } catch (error) {
         res.status(400).json({msg :"Não foi possível cadastrar."})
     }
 })
 
-app.put("/Treinamento:id", VerificaId("Treinamento"), () => {
+app.put("/Treinamento/:id", VerificaId("Treinamento"), async (req, res) => {
+    const {tipo, quemrealiza, dragaoparticipante, tempo} = req.body;
+    id = req.params.id;
     try {
-        if (condition) {
-
 
             res.status(200).json({msg : " editado com sucesso!"})     
-        } else {
-            
-        }
     } catch (error) {
         res.status(404).json({msg : "Algo deu errado na edição."})        
     }
 })
 
-app.delete("/Treinamento/:id", VerificaId("Treinamento"), (req, res) => {
+app.delete("/Treinamento/:id", VerificaId("Treinamento"), async (req, res) => {
+    id = req.params.id;
     try {
-        if (condition) {
 
-
-            res.status(200).json({msg : "Deletado com sucesso!"})  
-        } else {
-            
-        }
+            res.status(200).json({msg : "Deletado com sucesso!"}) 
     } catch (error) {
         res.status(400).json({msg : "Não encontrado!"})        
     }
