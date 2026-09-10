@@ -1,5 +1,4 @@
-/*===========================================
-
+/*
 Relacionamento baseado em HTTYD;
             Tabelas:
 1. Cavaleiro
