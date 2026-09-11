@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS Treinamento(
 
 
 /*JOIN's*/
-SELECT Cavaleiro.Funcao, Treinamento.ID FROM Cavaleiro JOIN Treinamento ON Cavaleiro.Funcao = Treinamento.ID;
+SELECT Cavaleiro.Funcao, Treinamento.ID FROM Cavaleiro JOIN Treinamento ON Cavaleiro.ID = Treinamento.QuemRealiza;
 
 SELECT Dragao.CavaleiroID, Cavaleiro.ID FROM Dragao JOIN Cavaleiro ON Dragao.CavaleiroID = Cavaleiro.ID;
-SELECT Dragao.TreinamentoID, Treinamento.ID FROM Dragao JOIN Treinamento ON Dragao.TreinamentoID = TreinamentoID;
 
 SELECT Treinamento.QuemRealiza, Cavaleiro.ID FROM Treinamento JOIN Cavaleiro ON Treinamento.QuemRealiza = Cavaleiro.ID;
+
 SELECT Treinamento.DragaoParticipante, Dragao.ID FROM Treinamento JOIN Dragao ON Treinamento.DragaoParticipante = Dragao.ID;

@@ -1,6 +1,6 @@
 const express = require("express");
 const { Pool } = require("pg");
-const VerificaId = require("./middlewares");
+const VerificaId = require("./middlewares/VerificaId");
 const VerificaLista = require("./middlewares/VerificaLista");
 const app = express();
 app.use(express.json());
@@ -13,7 +13,6 @@ const db = new Pool({
     password: "sua_senha",
     port: 5432
 });
-
 //O que aparece no site principal
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/static/index.html");
@@ -50,7 +49,7 @@ app.post("/Cavaleiro", VerificaLista(GenerosAceitaveis, "sexo"), async (req, res
 
     try { 
         if(!Number.isInteger(idade) || idade < 14 || idade > 80) {
-            res.status(405).json({msg : "Idade deve ser um número inteiro entre 14 e 80."});
+            return res.status(400).json({msg : "Idade deve ser um número inteiro entre 14 e 80."});
         } else {
             await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES($1, $2, $3, $4, $5)", [nome, sobrenome, idade, sexo, funcao]);
             res.status(201).json({msg : "Cavaleiro adicionado com sucesso!"});
@@ -74,7 +73,7 @@ app.put("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
 app.delete("/Cavaleiro/:id", VerificaId("Cavaleiro"), async (req, res) => {
     const id = req.params.id;
     try {
-        const cavaleiro = await db.query("DELETE FROM Cavaleiro WHERE id = $1", [id]);
+        await db.query("DELETE FROM Cavaleiro WHERE id = $1", [id]);
         
         res.status(200).json({msg : "Cavaleiro deletado com sucesso!"});
     } catch (error) {
@@ -104,9 +103,9 @@ app.get("/Dragao/:id", VerificaId("Dragao"), async (req, res) => {
 });
 
 app.post("/Dragao", VerificaLista(GenerosAceitaveis, "sexo"), VerificaLista(TiposAceitaveis, "tipo"), async (req, res) => {
-    const {nome, especie, sexo, tipo, treinamentoID, cavaleiroID} = req.body;
+    const {nome, especie, sexo, tipo, cavaleiroID} = req.body;
     try {
-        await db.query("INSERT INTO Dragao(nome, especie, sexo, tipo, treinamentoID, cavaleiroID) VALUES($1, $2, $3, $4, $5, $6)", [nome, especie, sexo, tipo, treinamentoID, cavaleiroID]);
+        await db.query("INSERT INTO Dragao(nome, especie, sexo, tipo, cavaleiroID) VALUES($1, $2, $3, $4, $5)", [nome, especie, sexo, tipo, cavaleiroID]);
         res.status(201).json({msg : "Dragão adicionado com sucesso!"});
     } catch (error) {
         res.status(400).json({msg :"Não foi possível cadastrar."});
@@ -114,10 +113,10 @@ app.post("/Dragao", VerificaLista(GenerosAceitaveis, "sexo"), VerificaLista(Tipo
 });
 
 app.put("/Dragao/:id", VerificaId("Dragao"), VerificaLista(GenerosAceitaveis, "sexo"), VerificaLista(TiposAceitaveis, "tipo"), async (req, res) => {
-    const {nome, especie, sexo, tipo, treinamentoID, cavaleiroID} = req.body;
+    const {nome, especie, sexo, tipo, cavaleiroID} = req.body;
     const id = req.params.id;
     try {
-        await db.query("UPDATE Dragao SET nome=$1, especie=$2, sexo=$3, tipo=$4, treinamentoID=$5, cavaleiroID=$6 WHERE id=$7", [nome, especie, sexo, tipo, treinamentoID, cavaleiroID, id]);
+        await db.query("UPDATE Dragao SET nome=$1, especie=$2, sexo=$3, tipo=$4, cavaleiroID=$5 WHERE id=$6", [nome, especie, sexo, tipo, cavaleiroID, id]);
         res.status(200).json({msg : "Dragão editado com sucesso!"});
     } catch (error) {
         res.status(404).json({msg : "Algo deu errado na edição."});        
@@ -128,7 +127,7 @@ app.delete("/Dragao/:id", VerificaId("Dragao"), async (req, res) => {
     const id = req.params.id;
     try {
         await db.query("DELETE FROM Dragao WHERE id=$1", [id]);
-        res.status(201).json({msg : "Dragão deletado com sucesso!"});
+        res.status(200).json({msg : "Dragão deletado com sucesso!"});
     } catch (error) {
         res.status(400).json({msg : "Não encontrado!"});  
     }

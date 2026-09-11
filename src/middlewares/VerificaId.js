@@ -1,3 +1,4 @@
+const { Pool } = require("pg");
 const db = new Pool({
     user: "postgres",
     host: "localhost",
@@ -25,16 +26,4 @@ function VerificaId(tabela) {
     }
 }
 
-
-function VerificaLista(lista, valor) {
-    return function (req, res, next) {
-        const item = req.body[valor];
-        if (!lista.includes(item)) {
-            return res.status(400).json({msg : `${valor} inválido`});
-        }
-        next();
-    }
-}
-
-module.exports = VerificaLista;
 module.exports = VerificaId;
