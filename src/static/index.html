@@ -8,55 +8,79 @@
 </head>
 <body>
     <h1>How To Train Your Dragon</h1>
-
-    <h2>Rotas</h2>
-
     <div class="ctnCavaleiro">
         <div class="item item1">
             <h2>Cavaleiro</h2>
             <h3>Parâmetros</h3>
             <ul>
-                <li>ID</li>
-                <li>Nome</li>
+                <li>ID - Uma chave primária que se atualiza sozinha.</li>
+                <li>Nome - Único.</li>
+                <li>Sobrenome - Pode se repetir.</li>
                 <li>Idade</li>
                 <li>Sexo</li>
                 <li>Função</li>
             </ul>
             <h3>Restrições</h3>
             <ul>
-                <li>Nome -</li>
-                <li>Idade</li>
-                <li>Sexo</li>
-                <li>Função</li>
+                <li>Nome - Obrigatório preencher; aceita até 20 letras.</li>
+                <li>Sobrenome - Obrigatório preencher; aceita até 20 letras.</li>
+                <li>Idade - Obrigatório preencher; aceita de 15 a 79 anos</li>
+                <li>Sexo - Obrigatório preencher com 'F', 'f', 'M' ou 'm'</li>
+                <li>Função - Opcional, aceita até 40 letras.</li>
             </ul>
         </div>
         <div class="item citem2">
             <h2 class="get">GET/Cavaleiro</h2>
+            <h3>Retorna uma lista contendo os cavaleiros existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item citem3">
             <h2 class="get">GET/Cavaleiro/:id</h2>
+            <h3>Retorna um cavaleiro específico, de acordo com o ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item citem4">
             <h2 class="post">POST/Cavaleiro</h2>
+            <h3>Insere um novo Cavaleiro na lista.</h3>
             <h3>Parâmetros</h3>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Possível Inserção:</h3>
+            <p>
+
+                <br> ou <br>
+
+            </p>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item citem5">
             <h2 class="put">PUT/Cavaleiro/:id</h2>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Edita um cavaleiro já existente, identificado pelo ID</h3>
+            <h3>Possível Inserção:</h3>
+            <p>
+
+                <br> ou <br>
+
+            </p>
             <h3>Exemplo de retorno</h3>
             <p></p>
         </div>
         <div class="item citem6">
             <h2 class="delete">DELETE/Cavaleiro/:id</h2>
+            <h3>Deleta um cavaleiro já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
             <p></p>
         </div>
@@ -67,23 +91,24 @@
             <h2>Dragão</h2>
             <h3>Parâmetros</h3>
             <ul>
-                <li>ID</li>
-                <li>Nome</li>
-                <li>Espécie</li>
+                <li>ID - Uma chave primária que se atualiza sozinha</li>
+                <li>Nome - Único.</li>
+                <li>Espécie - Pode se repetir.</li>
                 <li>Sexo</li>
                 <li>Tipo</li>
                 <li>CavaleiroID</li>
             </ul>
             <h3>Restrições</h3>
             <ul>
-                <li>Nome</li>
-                <li>Idade</li>
-                <li>Sexo</li>
+                <li>Nome - Obrigatório preencher, porém pode se repetir</li>
+                <li>Sexo - Obrigatório preencher com 'F', 'f', 'M' ou 'm'</li>
+                <li>Tipo - Obrigatório preencher; precisa obrigatóriamente ser algum nome da lista de classes (incluída abaixo)</li>
                 <li>CavaleiroID</li>
             </ul>
         </div>
         <div class="item ditem2">
             <h2>Classes de Dragões:</h2>
+            <ul style="text-align: center; list-style-type: none;">
             <li>Strike - Relâmpago</li>
             <li>Boulder - Rocha</li>
             <li>Sharper - Afiada</li>
@@ -91,38 +116,64 @@
             <li>Stoker - Brasa</li>
             <li>Tidal - Marinha</li>
             <li>Tracker - Rastreadora</li>
+            </ul>
 
             <p><i>PS: Insira o nome da classe em <u>Inglês</u>.</i></p>
         </div>
         <div class="item ditem3">
             <h2 class="get">GET/Dragao</h2>
+            <h3>Retorna uma lista contendo os dragões existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item ditem4">
             <h2 class="get">GET/Dragao/:id</h2>
+            <h3>Retorna um dragão especíofico, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item ditem5">
             <h2 class="post">POST/Dragao</h2>
+            <h3>Insere um novo dragão na lista.</h3>
             <h3>Parâmetros</h3>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Possível Inserção:</h3>
+            </p>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item ditem6">
             <h2 class="put">PUT/Dragao/:id</h2>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Edita um dragão já existente, identificado pelo ID</h3>
+            <h3>Possível Inserção:</h3>
+                            <br> ou <br></p>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item ditem7">
             <h2 class="delete">DELETE/Dragao/:id</h2>
+            <h3>Deleta um dragão já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
     </div>
 
@@ -132,7 +183,7 @@
             <h2>Treinamento</h2>
             <h3>Parâmetros</h3>
             <ul>
-                <li>ID</li>
+                <li>ID - Uma chave primária que se atualiza sozinha</li>
                 <li>Tipo</li>
                 <li>Quem Realiza</li>
                 <li>Dragão Participante</li>
@@ -148,33 +199,58 @@
         </div>
         <div class="item titem2">
             <h2 class="get">GET/Treinamento</h2>
+            <h3>Retorna uma lista contendo os treinamentos existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item titem3">
             <h2 class="get">GET/Treinamento/:id</h2>
+            <h3>Retorna um treinamento específico identificado pelo ID.</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item titem4">
             <h2 class="post">POST/Treinamento</h2>
+            <h3>Insere um novo  na lista.</h3>
             <h3>Parâmetros</h3>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Possível Inserção:</h3>
+            </p>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item titem5">
             <h2 class="put">PUT/Treinamento/:id</h2>
-            <h2>Possível Inserção:</h2>
-            <p></p>
+            <h3>Edita um treinamento já existente, identificado pelo ID</h3>
+            <h3>Possível Inserção:</h3>
+            </p></p>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
         <div class="item titem6">
             <h2 class="delete">DELETE/Treinamento/:id</h2>
+            <h3>Deleta um treinamento já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>
+
+                <br> ou <br>
+
+            </p>
         </div>
     </div>
 
