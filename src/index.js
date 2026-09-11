@@ -1,7 +1,8 @@
 const express = require("express");
 const { Pool } = require("pg");
 const VerificaId = require("./middlewares/verificaId");
-const VerificaLista = require("./middlewares/VerificaLista")
+const VerificaLista = require("./middlewares/VerificaLista");
+const Documentacao = require("...")
 const app = express();
 app.use(express.json());
 
@@ -12,6 +13,12 @@ const db = new Pool({
     password: "sua_senha",
     port: 5432
 });
+
+//O que aparece no site principal
+app.get("/", ){
+
+}
+
 //Variáveis conferidas
 const GenerosAceitaveis = ['F', 'f', 'M', 'm'];
 const TiposAceitaveis = ['Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker'];
