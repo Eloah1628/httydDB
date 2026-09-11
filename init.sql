@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Cavaleiro(
     Sobrenome VARCHAR(20) NOT NULL,
     Idade INTEGER NOT NULL CHECK (Idade BETWEEN 14 AND 80),
     Sexo CHAR(1) NOT NULL CHECK (Sexo IN ('F', 'f', 'M', 'm')),
-    Funcao VARCHAR(40) NOT NULL
+    Funcao VARCHAR(40)
 );
 
 CREATE TABLE IF NOT EXISTS Dragao(
@@ -21,11 +21,10 @@ CREATE TABLE IF NOT EXISTS Dragao(
     Especie VARCHAR(40) NOT NULL,
     Sexo CHAR(1) NOT NULL CHECK (Sexo IN ('F', 'f', 'M', 'm')),
     Tipo VARCHAR(20) NOT NULL CHECK (Tipo IN ('Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker')),
-    TreinamentoID INTEGER,
     CavaleiroID INTEGER,
 
     /*FK*/
-    CONSTRAINT FK_DragaoCavaleiro FOREIGN KEY (CavaleiroID) REFERENCES Cavaleiro(ID)
+    CONSTRAINT FK_DragaoCavaleiro FOREIGN KEY (CavaleiroID) REFERENCES Cavaleiro(ID) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Treinamento(
@@ -40,9 +39,6 @@ CREATE TABLE IF NOT EXISTS Treinamento(
     CONSTRAINT FK_TreinamentoDragao FOREIGN KEY(DragaoParticipante) REFERENCES Dragao(ID)
 );
 
-/*FK*/
-ALTER TABLE Cavaleiro ADD COLUMN DragaoID INTEGER NOT NULL;
-ALTER TABLE Cavaleiro ADD CONSTRAINT FK_CavaleiroPossuiDragao FOREIGN KEY(DragaoID) REFERENCES Dragao(ID);
 
 /*JOIN's*/
 SELECT Cavaleiro.Funcao, Treinamento.ID FROM Cavaleiro JOIN Treinamento ON Cavaleiro.Funcao = Treinamento.ID;

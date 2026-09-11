@@ -14,7 +14,7 @@ function VerificaId(tabela) {
             return res.status(500).json({msg : "Erro na verificação do ID"});
         }
         next();
-    };
+    }
 }
 
 module.exports = VerificaId;

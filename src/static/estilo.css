@@ -1,0 +1,60 @@
+body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.get {
+    display: inline;
+    color: rgb(28, 175, 77);
+    background-color: rgb(207, 255, 216);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.post {
+    display: inline;
+    color: rgb(72, 181, 248);
+    background-color: rgb(213, 244, 255);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.put {
+    display: inline;
+    color: rgb(255, 210, 64);
+    background-color: rgb(255, 244, 200);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.delete {
+    display: inline;
+    color: rgb(255, 99, 99);
+    background-color: rgb(255, 189, 189);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.ctnCavaleiro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+}
+
+.ctnDragao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+}
+
+.ctnTreinamento{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+}
+
+.citem1 {
+    
+}

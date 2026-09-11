@@ -4,6 +4,7 @@ function VerificaLista(lista, valor) {
         if (!lista.includes(item)) {
             return res.status(400).json({msg : `${valor} inválido`});
         }
+        next();
     }
 }
 

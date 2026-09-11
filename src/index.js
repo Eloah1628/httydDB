@@ -4,6 +4,7 @@ const VerificaId = require("./middlewares/verificaId");
 const VerificaLista = require("./middlewares/VerificaLista");
 const app = express();
 app.use(express.json());
+app.use(express.static(__dirname + "/static"));
 
 const db = new Pool({
     user: "postgres",
@@ -48,8 +49,8 @@ app.post("/Cavaleiro", VerificaLista(GenerosAceitaveis, "sexo"), async (req, res
     const {nome, sobrenome, idade, sexo, funcao} = req.body;
 
     try { 
-        if(idade < 13 || idade > 80) {
-            res.status(405).json({msg : "Você não tem idade para isso!"});
+        if(!Number.isInteger(idade) || idade < 14 || idade > 80) {
+            res.status(405).json({msg : "Idade deve ser um número inteiro entre 14 e 80."});
         } else {
             await db.query("INSERT INTO Cavaleiro(nome, sobrenome, idade, sexo, funcao) VALUES($1, $2, $3, $4, $5)", [nome, sobrenome, idade, sexo, funcao]);
             res.status(201).json({msg : "Cavaleiro adicionado com sucesso!"});
@@ -96,7 +97,7 @@ app.get("/Dragao/:id", VerificaId("Dragao"), async (req, res) => {
     const id = req.params.id;
     try {
         const dragao = await db.query("SELECT * FROM Dragao WHERE id = $1", [id]);
-        res.status(200).json(dragao);
+        res.status(200).json(dragao.rows[0]);
     } catch (error) {
         res.status(404).json({msg : "Não encontrado!"});        
     }
