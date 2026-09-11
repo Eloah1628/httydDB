@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS Dragao(
     Especie VARCHAR(40) NOT NULL,
     Sexo CHAR(1) NOT NULL CHECK (Sexo IN ('F', 'f', 'M', 'm')),
     Tipo VARCHAR(20) NOT NULL CHECK (Tipo IN ('Boulder', 'Mystery', 'Sharp', 'Stoker', 'Strike', 'Tidal', 'Tracker')),
-    TreinamentoID INTEGER NOT NULL,
-    CavaleiroID INTEGER NOT NULL,
+    TreinamentoID INTEGER,
+    CavaleiroID INTEGER,
 
     /*FK*/
     CONSTRAINT FK_DragaoCavaleiro FOREIGN KEY (CavaleiroID) REFERENCES Cavaleiro(ID)
