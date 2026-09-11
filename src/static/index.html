@@ -33,56 +33,36 @@
             <h2 class="get">GET/Cavaleiro</h2>
             <h3>Retorna uma lista contendo os cavaleiros existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p></p>
         </div>
         <div class="item citem3">
             <h2 class="get">GET/Cavaleiro/:id</h2>
             <h3>Retorna um cavaleiro específico, de acordo com o ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p></p>
         </div>
         <div class="item citem4">
             <h2 class="post">POST/Cavaleiro</h2>
             <h3>Insere um novo Cavaleiro na lista.</h3>
             <h3>Parâmetros</h3>
             <h3>Possível Inserção:</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p></p>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Cavaleiro adicionado com sucesso!"}</p>
         </div>
         <div class="item citem5">
             <h2 class="put">PUT/Cavaleiro/:id</h2>
             <h3>Edita um cavaleiro já existente, identificado pelo ID</h3>
             <h3>Possível Inserção:</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
-            <h3>Exemplo de retorno</h3>
             <p></p>
+            <h3>Exemplo de retorno</h3>
+            <p>{msg : "Cavaleiro editado com sucesso!"}</p>
         </div>
         <div class="item citem6">
             <h2 class="delete">DELETE/Cavaleiro/:id</h2>
             <h3>Deleta um cavaleiro já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p></p>
+            <p>{msg : "Cavaleiro Editado com sucesso!"}</p>
         </div>
     </div>
 
@@ -109,13 +89,13 @@
         <div class="item ditem2">
             <h2>Classes de Dragões:</h2>
             <ul style="text-align: center; list-style-type: none;">
-            <li>Strike - Relâmpago</li>
-            <li>Boulder - Rocha</li>
-            <li>Sharper - Afiada</li>
-            <li>Mystery - Mistério</li>
-            <li>Stoker - Brasa</li>
-            <li>Tidal - Marinha</li>
-            <li>Tracker - Rastreadora</li>
+                <li>Strike - Relâmpago</li>
+                <li>Boulder - Rocha</li>
+                <li>Sharper - Afiada</li>
+                <li>Mystery - Mistério</li>
+                <li>Stoker - Brasa</li>
+                <li>Tidal - Marinha</li>
+                <li>Tracker - Rastreadora</li>
             </ul>
 
             <p><i>PS: Insira o nome da classe em <u>Inglês</u>.</i></p>
@@ -124,56 +104,36 @@
             <h2 class="get">GET/Dragao</h2>
             <h3>Retorna uma lista contendo os dragões existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : ""}</p>
         </div>
         <div class="item ditem4">
             <h2 class="get">GET/Dragao/:id</h2>
             <h3>Retorna um dragão especíofico, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : ""}</p>
         </div>
         <div class="item ditem5">
             <h2 class="post">POST/Dragao</h2>
             <h3>Insere um novo dragão na lista.</h3>
             <h3>Parâmetros</h3>
             <h3>Possível Inserção:</h3>
-            </p>
+            <p></p>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Dragão adicionado com sucesso!"}</p>
         </div>
         <div class="item ditem6">
             <h2 class="put">PUT/Dragao/:id</h2>
             <h3>Edita um dragão já existente, identificado pelo ID</h3>
             <h3>Possível Inserção:</h3>
-                            <br> ou <br></p>
+            <p></p>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Dragão editaado com sucesso!"}</p>
         </div>
         <div class="item ditem7">
             <h2 class="delete">DELETE/Dragao/:id</h2>
             <h3>Deleta um dragão já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Dragão deletado com sucesso!"}</p>
         </div>
     </div>
 
@@ -191,31 +151,23 @@
             </ul>
             <h3>Restrições</h3>
             <ul>
-                <li>Tipo -</li>
-                <li>Quem Realiza</li>
-                <li>Dragão Participante</li>
-                <li>Tempo</li>
+                <li>Tipo - Obrigatório; preencha com até 20 letras.</li>
+                <li>Quem Realiza - Obrigatório; identificado pelo ID do cavaleiro.</li>
+                <li>Dragão Participante - Obrigatório; identificado pelo ID do dragão.</li>
+                <li>Tempo - Obrigatório; digite no formato '00:00:00'</li>
             </ul>
         </div>
         <div class="item titem2">
             <h2 class="get">GET/Treinamento</h2>
             <h3>Retorna uma lista contendo os treinamentos existentes.</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : ""}</p>
         </div>
         <div class="item titem3">
             <h2 class="get">GET/Treinamento/:id</h2>
             <h3>Retorna um treinamento específico identificado pelo ID.</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : ""}</p>
         </div>
         <div class="item titem4">
             <h2 class="post">POST/Treinamento</h2>
@@ -224,11 +176,7 @@
             <h3>Possível Inserção:</h3>
             </p>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Treinamento adicionado com sucesso!"}</p>
         </div>
         <div class="item titem5">
             <h2 class="put">PUT/Treinamento/:id</h2>
@@ -236,21 +184,13 @@
             <h3>Possível Inserção:</h3>
             </p></p>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Treinamento editado com sucesso"}</p>
         </div>
         <div class="item titem6">
             <h2 class="delete">DELETE/Treinamento/:id</h2>
             <h3>Deleta um treinamento já existente, identificado pelo ID</h3>
             <h3>Exemplo de retorno</h3>
-            <p>
-
-                <br> ou <br>
-
-            </p>
+            <p>{msg : "Treinamento deletado com sucesso!"}</p>
         </div>
     </div>
 
