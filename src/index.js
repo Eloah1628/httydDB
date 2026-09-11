@@ -1,6 +1,6 @@
 const express = require("express");
 const { Pool } = require("pg");
-const VerificaId = require("./middlewares/verificaId");
+const VerificaId = require("./middlewares");
 const VerificaLista = require("./middlewares/VerificaLista");
 const app = express();
 app.use(express.json());
